@@ -6,6 +6,7 @@ from pydantic import BaseModel, validator
 from dotenv import load_dotenv
 import google.generativeai as genai
 from google.api_core.exceptions import InvalidArgument, ResourceExhausted
+from mangum import Mangum
 
 load_dotenv()
 
@@ -256,3 +257,5 @@ async def explain_code(payload: ExplainRequest):
         mode=payload.mode,
         language=payload.language,
     )
+
+handler = Mangum(app)
