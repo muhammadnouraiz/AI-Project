@@ -29,7 +29,8 @@ if GEMINI_API_KEY:
     try:
         for m in genai.list_models():
             methods = getattr(m, "supported_generation_methods", []) or []
-            if "generateContent" in methods:
+            # NEW: Make sure it supports generation AND is not a text-to-speech model
+            if "generateContent" in methods and "tts" not in m.name.lower():
                 discovered_models.append(m.name)
     except Exception as e:
         logger.warning("Could not list Gemini models at startup (%s): %s", type(e).__name__, str(e))
