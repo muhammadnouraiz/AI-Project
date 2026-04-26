@@ -122,6 +122,8 @@ export default function CodeExplainer() {
         /<span\s+style\s*=\s*['\"]\s*color\s*:\s*red\s*;\s*font-weight\s*:\s*bold\s*;?\s*['\"]\s*>/gi,
         '<span class="bug-highlight">'
       )
+      // Fallback: still highlight plain [FIX: ...] suggestions even if inline styles are missing.
+      .replace(/\[FIX:\s*([^\]]+?)\]/gi, '<span class="bug-fix">[FIX: $1]</span>')
       .replace(/\r?\n/g, "<br />");
 
     return DOMPurify.sanitize(normalized, {
