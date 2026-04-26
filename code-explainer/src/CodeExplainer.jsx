@@ -108,8 +108,16 @@ export default function CodeExplainer() {
   const getSafeExplanationHtml = (rawExplanation) => {
     if (!rawExplanation) return "";
 
-    // Normalize the model's expected red-highlight span into a safe class.
+    // Normalize expected AI style spans into safe CSS classes.
     const normalized = rawExplanation
+      .replace(
+        /<span\s+style\s*=\s*['\"]\s*color\s*:\s*red\s*;\s*text-decoration\s*:\s*line-through\s*;?\s*['\"]\s*>/gi,
+        '<span class="bug-removed">'
+      )
+      .replace(
+        /<span\s+style\s*=\s*['\"]\s*color\s*:\s*green\s*;\s*font-weight\s*:\s*bold\s*;?\s*['\"]\s*>/gi,
+        '<span class="bug-fix">'
+      )
       .replace(
         /<span\s+style\s*=\s*['\"]\s*color\s*:\s*red\s*;\s*font-weight\s*:\s*bold\s*;?\s*['\"]\s*>/gi,
         '<span class="bug-highlight">'

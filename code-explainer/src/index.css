@@ -4,3 +4,23 @@
 	color: #dc2626;
 	font-weight: 700;
 }
+
+.bug-removed {
+	color: #b91c1c;
+	background-color: #fef2f2;
+	border: 1px solid #fecaca;
+	border-radius: 0.375rem;
+	padding: 0.05rem 0.35rem;
+	text-decoration: line-through;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.bug-fix {
+	color: #166534;
+	background-color: #f0fdf4;
+	border: 1px solid #bbf7d0;
+	border-radius: 0.375rem;
+	padding: 0.05rem 0.35rem;
+	font-weight: 700;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
