@@ -51,7 +51,7 @@ export default function CodeExplainer() {
     setOutput(null);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/explain`, {
+      const response = await fetch(`/api/explain`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
