@@ -131,6 +131,7 @@ Rules:
 - Number each explanation item to match the corresponding line or logical block.
 - For each item, state in plain English what the line does and why it exists.
 - If a line uses a notable programming concept (recursion, list comprehension, inheritance, etc.), name and briefly define that concept.
+- If you detect a bug or error, wrap only the specific buggy snippet or faulty logic phrase in <span style='color: red; font-weight: bold;'> and </span> so it is visually highlighted.
 - Keep each explanation concise: one to three sentences per item.
 - Do not add any introductory or closing remarks. Output only the numbered explanation list.
 - Write for a reader who understands basic programming but may not know this language well.
@@ -150,6 +151,7 @@ Rules:
 - Structure your response as clearly labelled steps (e.g., Step 1: Input Validation, Step 2: Initialization, etc.).
 - For each step, explain the purpose of that phase, what inputs it uses, what it produces, and why it is necessary.
 - After the steps, add a short "Key Concepts Used" section listing any important programming techniques present in the code (e.g., recursion, memoisation, object-oriented design).
+- If you detect a bug or error, wrap only the specific buggy snippet or faulty logic phrase in <span style='color: red; font-weight: bold;'> and </span> so it is visually highlighted.
 - Write in plain, direct English. Avoid jargon unless you define it immediately.
 - Do not add any introductory or closing remarks beyond the steps themselves.
 
@@ -169,6 +171,7 @@ Rules:
 - Paragraph 2: Describe the overall approach or algorithm used, without referencing individual lines.
 - Paragraph 3: Mention any notable design decisions, trade-offs, or assumptions baked into the code.
 - Optional Paragraph 4: Note any obvious limitations, edge cases the code does not handle, or potential improvements.
+- If you detect a bug or error, wrap only the specific buggy snippet or faulty logic phrase in <span style='color: red; font-weight: bold;'> and </span> so it is visually highlighted.
 - Do not use bullet points. Write in clean, readable prose.
 - Do not add any introductory phrase like "Sure!" or "Here is a summary". Go directly into the content.
 

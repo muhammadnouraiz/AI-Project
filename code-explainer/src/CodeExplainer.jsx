@@ -1,4 +1,5 @@
 import { useState } from "react";
+import DOMPurify from "dompurify";
 
 const LANGUAGES = [
   "Auto-Detect",
@@ -103,6 +104,23 @@ export default function CodeExplainer() {
   };
 
   const selectedMode = MODES.find((m) => m.id === mode);
+
+  const getSafeExplanationHtml = (rawExplanation) => {
+    if (!rawExplanation) return "";
+
+    // Normalize the model's expected red-highlight span into a safe class.
+    const normalized = rawExplanation
+      .replace(
+        /<span\s+style\s*=\s*['\"]\s*color\s*:\s*red\s*;\s*font-weight\s*:\s*bold\s*;?\s*['\"]\s*>/gi,
+        '<span class="bug-highlight">'
+      )
+      .replace(/\r?\n/g, "<br />");
+
+    return DOMPurify.sanitize(normalized, {
+      ALLOWED_TAGS: ["span", "br", "strong", "em", "code"],
+      ALLOWED_ATTR: ["class"],
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -367,9 +385,12 @@ export default function CodeExplainer() {
 
                   {/* Text output */}
                   <div className="flex-1 overflow-y-auto px-5 py-4">
-                    <pre className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap font-sans">
-                      {output}
-                    </pre>
+                    <div
+                      className="text-sm text-gray-700 leading-relaxed whitespace-pre-wrap font-sans"
+                      dangerouslySetInnerHTML={{
+                        __html: getSafeExplanationHtml(output),
+                      }}
+                    />
                   </div>
                 </div>
               )}
