@@ -183,7 +183,7 @@ def root():
     return {"status": "ok", "message": "Code Explanation Assistant API is running."}
 
 
-@app.post("/explain", response_model=ExplainResponse)
+@app.post("/api/explain", response_model=ExplainResponse)
 async def explain_code(payload: ExplainRequest):
     if not GEMINI_API_KEY or model is None:
         error_message = "Server misconfiguration: GEMINI_API_KEY is missing or not loaded from .env"
