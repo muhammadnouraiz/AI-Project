@@ -1,2 +1,5 @@
-import CodeExplainer from "./CodeExplainer";
-export default function App() { return <CodeExplainer />; }
+import Home from "./pages/Home";
+
+export default function App() {
+  return <Home />;
+}
