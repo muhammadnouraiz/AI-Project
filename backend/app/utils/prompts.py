@@ -35,8 +35,8 @@ Rules:
 - Write for a reader who understands basic programming but may not know this language well.
 
 Code:
+{code}
 """
-
     if mode == "step_by_step":
         return f"""You are an expert software engineering tutor helping students and junior developers understand code.
 
@@ -52,8 +52,8 @@ Rules:
 - Do not add any introductory or closing remarks beyond the steps themselves.
 
 Code:
+{code}
 """
-
     if mode == "summary":
         return f"""You are an expert software engineering tutor helping students and junior developers understand code.
 
@@ -70,7 +70,7 @@ Rules:
 - Do not add any introductory phrase like "Sure!" or "Here is a summary". Go directly into the content.
 
 Code:
-"""
-    
+{code}
+"""  
     # Fallback return to prevent NoneType errors if mode is completely unrecognized
     return f"Explain this {lang_label} code: \n\n{code}"
