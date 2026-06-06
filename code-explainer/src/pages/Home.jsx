@@ -1,91 +1,56 @@
 import { useState } from "react";
 import useExplainCode from "../hooks/useExplainCode";
 import { MODES } from "../utils/constants";
-
-// Layout & UI
 import MainLayout from "../components/layout/MainLayout";
-import Button from "../components/ui/Button";
-
-// Panels
-import CodeInputPanel from "../components/input/CodeInputPanel";
-import ControlsRow from "../components/input/ControlsRow";
 import ExplanationPanel from "../components/output/ExplanationPanel";
 
 export default function Home() {
-  // Local UI State
-  const [code, setCode] = useState("");
   const [language, setLanguage] = useState("Auto-Detect");
-  const [mode, setMode] = useState("line_by_line");
+  const [mode, setMode] = useState("custom");
   const [customPrompt, setCustomPrompt] = useState("");
 
-  // Business Logic from Hook
-  const { 
-    messages, 
-    loading, 
-    hasSubmitted, 
+  const {
+    messages,
+    loading,
+    hasSubmitted,
     generateExplanation,
-    sendFollowUp, 
-    clearExplanation 
+    sendFollowUp,
+    clearExplanation,
   } = useExplainCode();
 
-  // Derived state
   const selectedModeLabel = MODES.find((m) => m.id === mode)?.label || mode;
 
-  // Handlers
-  const handleGenerate = () => generateExplanation(code, language, mode, customPrompt);
-  
-  const handleSendFollowUp = (userMessage) => {
-    sendFollowUp(code, language, mode, userMessage);
+  const handleGenerate = (userText) => {
+    generateExplanation(userText, language, mode, mode === "custom" ? customPrompt : "");
   };
 
-  const handleClear = () => {
-    setCode("");
-    setCustomPrompt("");
+  // No longer passes code — the hook stores it internally
+  const handleSendFollowUp = (userMessage) => {
+    sendFollowUp(language, mode, userMessage);
+  };
+
+  const handleNewChat = () => {
     clearExplanation();
+    setCustomPrompt("");
   };
 
   return (
     <MainLayout>
-      <div className="flex flex-col lg:flex-row gap-6 h-full">
-        
-        {/* Left Side: Input Flow */}
-        <div className="w-full lg:w-1/2 flex flex-col gap-5">
-          <CodeInputPanel 
-            code={code} 
-            setCode={setCode} 
-            onClear={handleClear} 
-          />
-          <ControlsRow 
-            language={language} 
-            setLanguage={setLanguage} 
-            mode={mode} 
-            setMode={setMode}
-            customPrompt={customPrompt}
-            setCustomPrompt={setCustomPrompt} 
-          />
-          <Button 
-            onClick={handleGenerate} 
-            // Prevent generation if code is empty OR if custom mode is selected but prompt is empty
-            disabled={!code.trim() || (mode === 'custom' && !customPrompt.trim())} 
-            loading={loading && messages.length === 0}
-          >
-            {loading && messages.length === 0 ? "Analyzing Code..." : "Generate Explanation"}
-          </Button>
-        </div>
-
-        {/* Right Side: Output Flow (Chat Interface) */}
-        <div className="w-full lg:w-1/2">
-          <ExplanationPanel 
-            messages={messages}
-            loading={loading}
-            hasSubmitted={hasSubmitted}
-            selectedModeLabel={selectedModeLabel}
-            language={language}
-            onSendFollowUp={handleSendFollowUp}
-          />
-        </div>
-
-      </div>
+      <ExplanationPanel
+        messages={messages}
+        loading={loading}
+        hasSubmitted={hasSubmitted}
+        selectedModeLabel={selectedModeLabel}
+        language={language}
+        setLanguage={setLanguage}
+        mode={mode}
+        setMode={setMode}
+        customPrompt={customPrompt}
+        setCustomPrompt={setCustomPrompt}
+        onGenerate={handleGenerate}
+        onSendFollowUp={handleSendFollowUp}
+        onNewChat={handleNewChat}
+      />
     </MainLayout>
   );
 }
