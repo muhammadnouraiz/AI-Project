@@ -1,7 +1,7 @@
 # app/utils/prompts.py
 
 # --- Constants ---
-VALID_MODES = {"line_by_line", "step_by_step", "summary"}
+VALID_MODES = {"line_by_line", "step_by_step", "summary", "custom"}
 
 BUG_DETECTION_RULES = """- If you detect a bug or error, you MUST show both the incorrect code and the corrected code inline, immediately next to each other.
 - Use this exact format for each bug you mention: <span style='color: red; text-decoration: line-through;'>WRONG_SNIPPET</span> <span style='color: green; font-weight: bold;'>[FIX: CORRECT_SNIPPET]</span>

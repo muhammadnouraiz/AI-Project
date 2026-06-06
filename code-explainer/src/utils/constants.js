@@ -31,4 +31,9 @@ export const MODES = [
     label: "High-Level Summary",
     description: "Gives the overall purpose",
   },
+  {
+    id: "custom",
+    label: "Custom Prompt",
+    description: "Provide your own specific instruction",
+  },
 ];
