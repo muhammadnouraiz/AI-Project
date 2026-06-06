@@ -1,4 +1,5 @@
 from pydantic import BaseModel, validator
+from typing import Optional
 from app.utils.prompts import VALID_MODES
 
 class ExplainRequest(BaseModel):
@@ -8,6 +9,9 @@ class ExplainRequest(BaseModel):
     code: str
     language: str = "Auto-Detect"
     mode: str = "line_by_line"
+    session_id: str
+    user_message: Optional[str] = None  # Used for follow-up chat questions
+    custom_prompt: Optional[str] = None # Used when mode == "custom"
 
     @validator("code")
     def code_must_not_be_empty(cls, v):
@@ -28,6 +32,12 @@ class ExplainRequest(BaseModel):
         if not v.strip():
             return "Auto-Detect"
         return v.strip()
+        
+    @validator("session_id")
+    def session_id_must_not_be_empty(cls, v):
+        if not v.strip():
+            raise ValueError("session_id must not be empty.")
+        return v.strip()
 
 
 class ExplainResponse(BaseModel):
@@ -37,3 +47,4 @@ class ExplainResponse(BaseModel):
     explanation: str
     mode: str
     language: str
+    session_id: str
