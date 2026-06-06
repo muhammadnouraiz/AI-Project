@@ -20,7 +20,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "code-explainer/$1"
+      "dest": "code-explainer/dist/$1"
     }
   ]
 }
