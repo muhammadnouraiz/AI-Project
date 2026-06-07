@@ -158,13 +158,11 @@ APPWRITE_COLLECTION_ID=your_appwrite_collection_id
 
 Create a collection in your Appwrite database with the following attributes:
 
-| Attribute | Type | Description |
-|---|---|---|
-| `session_id` | String | UUID identifying the chat session |
-| `model` | String | Gemini model used for the session |
-| `mode` | String | Explanation mode (`line_by_line`, `step_by_step`, etc.) |
-| `original_code` | String | The code submitted by the user |
-| `chat_history` | String | JSON-serialised array of message objects |
+| Attribute | Type | Size | Required | Description |
+|---|---|---|---|---|
+| `session_id` | String | 255 | ✅ Yes | UUID identifying the chat session |
+| `code_snippet` | Text | — | ✅ Yes | The source code submitted by the user |
+| `chat_history` | Text | — | ✅ Yes | JSON-serialised array of conversation message objects |
 
 ---
 
